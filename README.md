@@ -17,27 +17,27 @@ A modern recipe website built with **React** and **Vite**, styled using **SCSS**
 ## 🧩 Project Structure
 
 react-recipe-app/
-│
-├── public/ # Static assets (favicon, images)
-├── src/ # Source code
-│ ├── components/ # Reusable UI components
-│ ├── pages/ # Page components (Home, Details, etc.)
-│ ├── styles/ # SCSS styles
-│ │ ├── partials/ # Variables, mixins, reset files
-│ │ └── index.scss # Main SCSS entry file
-│ ├── App.jsx # Root app component
-│ └── main.jsx # Entry point of the app
-│
-├── package.json # Dependencies and scripts
-├── vite.config.js # Vite configuration
-├── index.html # Main HTML template
+
+-  public/ # Static assets (favicon, images)
+- src/ # Source code
+-  components/ # Reusable UI components
+-  pages/ # Page components (Home, Details, etc.)
+- styles/ # SCSS styles
+-  partials/ # Variables, mixins, reset files
+-  index.scss # Main SCSS entry file
+-  App.jsx # Root app component
+ main.jsx # Entry point of the app
+
+- package.json # Dependencies and scripts
+-  vite.config.js # Vite configuration
+- index.html # Main HTML template
 
 
 ---
 
 ## ⚙️ Installation & Setup
 
-```bash
+``` bash
 # Clone this repository
 git clone https://github.com/your-username/react-recipe-app.git
 
@@ -51,9 +51,9 @@ npm install
 npm run dev
 
 npm run build
-The production-ready files will be available in the dist/ folder.
-
-📸 Project Preview :  [Live Demo 👉](react-recipe-site-zeta.vercel.app) 
+The production-ready files will be available in the dist/ folder. 
+```
+- Project Prevoiew: [live demo here](react-recipe-site-zeta.vercel.app)
 
 💡 Future Improvements
 
