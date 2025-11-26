@@ -53,7 +53,6 @@ npm run dev
 npm run build
 The production-ready files will be available in the dist/ folder. 
 ```
-- Project Prevoiew: [live demo here](react-recipe-site-8vh704iwm-paras941s-projects.vercel.app)
 
 💡 Future Improvements
 
