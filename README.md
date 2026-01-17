@@ -13,32 +13,22 @@ SCSS (Modular Styling)
 Responsive Design
 
 📂 Project Structure
+
+## 📂 Project Structure
+
+```text
 react-recipe-app/
-├── public/
-│   └── images/
-├── src/
-│   ├── components/
-│   │   ├── Navbar/
-│   │   ├── RecipeCard/
-│   │   ├── SearchBar/
-│   │   └── Footer/
-│   ├── pages/
-│   │   ├── Home.jsx
-│   │   ├── RecipeDetails.jsx
-│   │   └── Favorites.jsx
-│   ├── styles/
-│   │   ├── partials/
-│   │   │   ├── _variables.scss
-│   │   │   ├── _mixins.scss
-│   │   │   └── _reset.scss
-│   │   └── index.scss
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
+├── public/                 # Static assets
+├── src/                    # React source files
+│   ├── App.jsx             # Root component
+│   └── main.jsx            # Entry point
+├── index.html              # HTML template
+├── package.json            # Dependencies & scripts
+├── package-lock.json       # Lock file
+├── vite.config.js          # Vite configuration
+└── README.md               # Documentation
+
+
 ## ⚛️ React Concepts Used
 
 | Feature / Hook            | Where Used                 | Purpose                               |
@@ -58,12 +48,6 @@ Search & Filter Recipes
 Add to Favorites
 Responsive Layout
 SCSS Modular Styling
-
-🛠 Installation
-git clone https://github.com/your-username/react-recipe-app.git
-cd react-recipe-app
-npm install
-npm run dev
 
 🔮 Future Improvements
 
