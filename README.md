@@ -16,7 +16,7 @@ Responsive Design
 
 ## 📂 Project Structure
 
-```text
+
 react-recipe-app/
 ├── public/                 # Static assets
 ├── src/                    # React source files
