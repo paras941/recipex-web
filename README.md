@@ -1,10 +1,11 @@
 🍽️ RecipeX
+
+Live Demo here : [click here](https://react-recipe-site-zeta.vercel.app)
 ```text
 A modern, responsive recipe web application built with React and Vite, demonstrating real-world usage of core React concepts like useState, useEffect, props, routing, and component-based architecture, with modular SCSS styling.
 
 This project is built to showcase clean frontend structure and best practices for portfolio, internships, and placement interviews.
 
-Live Demo here : [click here](https://react-recipe-site-zeta.vercel.app)
 
 🚀 Tech Stack
 
