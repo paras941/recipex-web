@@ -1,28 +1,73 @@
+// .section.improve-skills{
+//     .col.img{
+//         img{
+//             width: 100%;
+//         }
+//     }
+//     .col.typography{
+//         padding-left: 1em;
+//         .skill-item{
+//             border-left: .2em solid var(--primary-color);
+//             margin-bottom: .5em;
+//             padding: .1em 0 .1em .5em;
+//             color: var(--text-light);
+//             font-weight: bold;
+//             transform: translateX(100%);
+//             opacity: 0;
+//             animation: getAnimationDuration(.3s) slideInRight forwards;
+//             @for $i from 2 through 7 {
+//                 &:nth-child(#{$i}){
+//                     animation-delay: #{$i * .1}s;
+//                 }
+//             }
+//         }
+//         .btn{
+//             margin-top: .75em;
+//         }
+//     }
+// }
+
 .section.improve-skills{
     .col.img{
         img{
             width: 100%;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.18);
         }
     }
+
     .col.typography{
-        padding-left: 1em;
+        padding-left: 2em;
+
         .skill-item{
-            border-left: .2em solid var(--primary-color);
-            margin-bottom: .5em;
-            padding: .1em 0 .1em .5em;
-            color: var(--text-light);
-            font-weight: bold;
-            transform: translateX(100%);
+            background: var(--background-light);
+            border-left: 4px solid var(--primary-color);
+            margin-bottom: .75em;
+            padding: .6em .8em;
+            border-radius: 6px;
+            color: var(--text-color);
+            font-weight: 600;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+
+            transform: translateX(60%);
             opacity: 0;
-            animation: getAnimationDuration(.3s) slideInRight forwards;
-            @for $i from 2 through 7 {
+            animation: getAnimationDuration(.5s) slideInRight forwards ease-out;
+            transition: transform .25s ease, box-shadow .25s ease;
+
+            &:hover{
+                transform: translateY(-3px) scale(1.02);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            }
+
+            @for $i from 1 through 7 {
                 &:nth-child(#{$i}){
-                    animation-delay: #{$i * .1}s;
+                    animation-delay: #{$i * .08}s;
                 }
             }
         }
+
         .btn{
-            margin-top: .75em;
+            margin-top: 1em;
         }
     }
 }
