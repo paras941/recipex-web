@@ -1,30 +1,371 @@
-@keyframes slideInLeft{
-    from{
+// ==========================================
+// ADVANCED ANIMATION LIBRARY
+// Professional animations for recruiter appeal
+// ==========================================
+
+// Basic Slide Animations
+@keyframes slideInLeft {
+    from {
         transform: translateX(-100%);
+        opacity: 0;
     }
-    to{
+    to {
         transform: translateX(0);
+        opacity: 1;
     }
 }
 
 @keyframes slideInRight {
-    from{
+    from {
         transform: translateX(100%);
         opacity: 0;
     }
-    to{
+    to {
         transform: translateX(0);
         opacity: 1;
     }
 }
 
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+// Pop & Scale Animations
 @keyframes popOut {
-    from{
+    from {
         transform: scale(0);
         opacity: 0;
     }
-    to{
+    to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40%, 43% {
+        transform: translateY(-20px);
+    }
+    70% {
+        transform: translateY(-10px);
+    }
+    90% {
+        transform: translateY(-4px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.3);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.3);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
+// Fade Animations
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+// Rotation Animations
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotate(-180deg) scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0deg) scale(1);
+        opacity: 1;
+    }
+}
+
+// Shimmer Effect for Loading
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+// Glow Animation
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--primary-color);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+    }
+}
+
+// Shake Animation
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-5px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(5px);
+    }
+}
+
+// Float Animation
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+// Ripple Effect
+@keyframes ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+// Toast Animations
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+// Page Transition
+@keyframes pageEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Stagger Children Animation Helper
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Progress Bar Fill
+@keyframes progressFill {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+// Cooking Timer Animation
+@keyframes timerPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 0, 86, 0.4);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 0 10px rgba(255, 0, 86, 0);
+    }
+}
+
+// 3D Card Flip
+@keyframes flipIn {
+    from {
+        transform: perspective(400px) rotateY(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: perspective(400px) rotateY(0);
+        opacity: 1;
+    }
+}
+
+// Utility Classes
+.animate-fadeIn {
+    animation: fadeIn calc(0.5s * var(--animation-speed)) ease-out forwards;
+}
+
+.animate-fadeInUp {
+    animation: fadeInUp calc(0.6s * var(--animation-speed)) ease-out forwards;
+}
+
+.animate-slideInLeft {
+    animation: slideInLeft calc(0.5s * var(--animation-speed)) ease-out forwards;
+}
+
+.animate-slideInRight {
+    animation: slideInRight calc(0.5s * var(--animation-speed)) ease-out forwards;
+}
+
+.animate-popIn {
+    animation: popIn calc(0.4s * var(--animation-speed)) ease-out forwards;
+}
+
+.animate-bounce {
+    animation: bounce calc(1s * var(--animation-speed)) ease-in-out;
+}
+
+.animate-pulse {
+    animation: pulse calc(2s * var(--animation-speed)) ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float calc(3s * var(--animation-speed)) ease-in-out infinite;
+}
+
+.animate-glow {
+    animation: glow calc(2s * var(--animation-speed)) ease-in-out infinite;
+}
+
+// Page wrapper animation
+.page-enter {
+    animation: pageEnter calc(0.4s * var(--animation-speed)) ease-out;
+}
+
+// Stagger animation for lists
+.stagger-children > * {
+    opacity: 0;
+    animation: staggerFadeIn calc(0.5s * var(--animation-speed)) ease-out forwards;
+    
+    @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+            animation-delay: calc(#{$i * 0.05}s * var(--animation-speed));
+        }
     }
 }

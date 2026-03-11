@@ -1,6 +1,6 @@
 .navbar{
-    height: 55px;
-    box-shadow: 0 3px 6px var(--shadow-color);
+    height: 60px;
+    box-shadow: 0 2px 20px var(--shadow-color);
     background-color: var(--background-color);
     color: var(--text-color);
     display: flex;
@@ -10,58 +10,99 @@
     width: 100%;
     top: 0;
     z-index: 998;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    
     .logo{
-        font-size: 1.5em;
-        font-weight: bolder;
+        font-size: 1.6em;
+        font-weight: 900;
         color: var(--primary-color);
-        text-shadow: 0 1px 3px var(--shadow-color);
+        transition: transform 0.3s ease;
+        
         span{
             color: var(--text-color);
         }
-    }
-    .nav-links{
-        a{
-            margin-left: 1em;
-            color: var(--text-light);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            position: relative;
-            font-size: .9em;
-            &::before{
-                content: '';
-                display: inline-block;
-                height: 3px;
-                width: 100%;
-                background-color: var(--primary-color);
-                position: absolute;
-                bottom: -5px;
-                left: 0;
-                transform: scaleX(0);
-                transition: getAnimationDuration(.2s) ease-in-out;
-            }
-            &:hover{
-                &::before{
-                    transform: scaleX(1);
-                }
-            }
-            &.active{
-                color: var(--primary-color);
-                font-weight: bold;
-            }
+        
+        &:hover {
+            transform: scale(1.05);
         }
     }
+    
+    .nav-links{
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4em;
+            padding: 0.6em 1em;
+            color: var(--text-light);
+            font-size: 0.9em;
+            font-weight: 500;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            
+            .nav-icon {
+                font-size: 1em;
+            }
+            
+            .nav-badge {
+                position: absolute;
+                top: 0;
+                right: 0;
+                background: var(--primary-color);
+                color: white;
+                font-size: 0.65em;
+                padding: 0.2em 0.5em;
+                border-radius: 10px;
+                font-weight: bold;
+                transform: translate(30%, -30%);
+                animation: popIn 0.3s ease;
+            }
+            
+            &:hover {
+                background: var(--background-light);
+                color: var(--primary-color);
+            }
+            
+            &.active {
+                background: var(--primary-color);
+                color: white;
+                
+                .nav-badge {
+                    background: white;
+                    color: var(--primary-color);
+                }
+            }
+        }
+        
+        @media (max-width: 900px) {
+            display: none;
+        }
+    }
+    
     .sidebar-btn{
         height: 28px;
-        width: 30px;
+        width: 32px;
         position: relative;
         display: none;
+        cursor: pointer;
+        
+        @media (max-width: 900px) {
+            display: block;
+        }
+        
         .bar{
             border-radius: 5px;
-            height: 6px;
+            height: 4px;
             width: 100%;
             background-color: var(--text-color);
             position: absolute;
-            transition: transform getAnimationDuration(.5s);
+            transition: transform calc(0.4s * var(--animation-speed)) ease;
+            
             &:nth-child(1){
                 top: 0;
             }
@@ -69,7 +110,6 @@
                 top: 50%;
                 transform-origin: right;
                 transform: scaleX(.8) translateY(-50%);
-
             }
             &:nth-child(3){
                 top: 100%;
@@ -77,10 +117,12 @@
                 transform: scaleX(1.1) translateY(-100%);
             }
         }
+        
         &.active{
             .bar{
                 transform-origin: center;
                 top: 50%;
+                
                 &:nth-child(1){
                     transform: translate(0, -50%) scale(1) rotate(45deg);
                 }
@@ -94,41 +136,75 @@
         }
     }
 }
+
 .sidebar{
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 260px;
+    width: 280px;
     z-index: 999;
     background-color: var(--background-color);
-    box-shadow: 0 0 0 1000px rgba(0,0,0,0.2),
-                3px 0 5px var(--shadow-color);
-    animation: getAnimationDuration(.3s) slideInLeft;
+    box-shadow: 0 0 0 1000px rgba(0,0,0,0.3),
+                5px 0 30px var(--shadow-color);
+    animation: slideInLeft calc(0.3s * var(--animation-speed)) ease-out;
+    padding-top: 70px;
+    
     .sidebar-link{
-        display: block;
-        padding: .5em 1em;
-        border-left: .4em solid transparent;
-        margin-bottom: 1em;
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+        padding: 1em 1.5em;
+        border-left: 4px solid transparent;
+        margin-bottom: 0.25em;
         color: var(--text-color);
-        font-size: 1.1em;
+        font-size: 1em;
+        font-weight: 500;
         transform: translateX(-100%);
-        animation: getAnimationDuration(.3s) slideInLeft forwards;
-        @for $i from 1 through 3{
+        animation: slideInLeft calc(0.3s * var(--animation-speed)) ease-out forwards;
+        transition: all 0.3s ease;
+        position: relative;
+        
+        @for $i from 1 through 5 {
             &:nth-child(#{$i}){
-                animation-delay: #{$i * .1}s;
+                animation-delay: calc(#{$i * 0.05}s * var(--animation-speed));
             }
         }
-        &.active{
-            border-left-color: var(--primary-color);
-        }
-        &:hover{
-            border-left-color: var(--primary-color);
-            background-color: rgba(0,0,0,0.05);
-        }
-        svg{
+        
+        svg {
             width: 1.2em;
-            margin-right: .5em;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-badge {
+            position: absolute;
+            right: 1.5em;
+            background: var(--primary-color);
+            color: white;
+            font-size: 0.75em;
+            padding: 0.2em 0.6em;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        &.active {
+            border-left-color: var(--primary-color);
+            background: linear-gradient(90deg, rgba(255, 0, 86, 0.1), transparent);
+            color: var(--primary-color);
+            
+            svg {
+                color: var(--primary-color);
+            }
+        }
+        
+        &:hover {
+            border-left-color: var(--primary-color);
+            background: var(--background-light);
+            
+            svg {
+                color: var(--primary-color);
+            }
         }
     }
 }

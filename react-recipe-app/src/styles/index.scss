@@ -1,7 +1,7 @@
 :root{
     --background-color: #fff;
-    --background-light: #fff;
-    --shadow-color: rgba(0,0,0,0.2);
+    --background-light: #f8f9fa;
+    --shadow-color: rgba(0,0,0,0.1);
     --primary-color: rgb(255, 0, 86);
     --text-color: #0A0A0A;
     --text-light: #575757;
@@ -19,76 +19,158 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body{
     font-size: var(--font-size);
     font-family: 'Roboto', sans-serif;
-    padding-top: 55px;
+    padding-top: 60px;
     background-color: var(--background-light);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 a{
     text-decoration: none;
+    color: inherit;
 }
+
 img{
     object-fit: cover;
 }
 
+// Selection styling
+::selection {
+    background: var(--primary-color);
+    color: white;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-light);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: darken(rgb(255, 0, 86), 10%);
+}
+
+// Container
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2em;
+
+    @media (max-width: 768px) {
+        padding: 0 1em;
+    }
+}
+
+.main {
+    min-height: calc(100vh - 160px);
+    padding-top: 2em;
+    padding-bottom: 2em;
+}
+
+// Buttons
 .btn{
     border: none;
     outline: none;
     background-color: var(--primary-color);
     color: #fff;
-    padding: .75em 1em;
+    padding: .75em 1.25em;
     text-transform: uppercase;
-    font-size: 1em;
+    font-size: 0.9em;
     font-weight: bold;
     letter-spacing: 1px;
-    border-radius: 3px;
-    box-shadow: 0 2px 6px var(--shadow-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(255, 0, 86, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    
     &:hover{
-        box-shadow: 0 1px 3px var(--shadow-color);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 0, 86, 0.4);
+    }
+    
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
     }
 }
 
+// Custom image component
 .custom-image{
-    background-color: red;
+    background-color: var(--background-light);
     height: 0;
     width: 100%;
     position: relative;
+    overflow: hidden;
+    border-radius: inherit;
+    
     img{
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        transition: transform 0.5s ease;
     }
 }
 
+// Import animations first
+@import "partials/animations";
+
+// Import component styles
 @import "partials/navbar.scss";
 
 .section{
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 3vw;
+    margin-bottom: 3em;
+    
     &.d-block{
         display: block;
     }
+    
     .title{
         color: var(--text-color);
         font-size: 2.5em;
         margin-bottom: .25em;
         font-weight: 900;
     }
+    
     .info{
         color: var(--text-light);
         font-size: 1em;
         letter-spacing: 1px;
-        line-height: 1.3;
+        line-height: 1.5;
         margin-bottom: 1.25em;
-
     }
+    
     .col{
         width: 50%;
+        
+        @media (max-width: 900px) {
+            width: 100%;
+        }
     }
 }
 
@@ -98,25 +180,37 @@ img{
 @import "partials/chiefs-section.scss";
 @import "partials/previous-searches.scss";
 @import "partials/recipes-section.scss";
+@import "partials/recipe-detail.scss";
+@import "partials/components.scss";
+@import "partials/footer.scss";
 
-
+// Options container (settings)
 .options-container{
-    box-shadow: 0 5px 10px var(--shadow-color);
+    box-shadow: 0 5px 20px var(--shadow-color);
     padding: 1em;
-    border-radius: 5px;
+    border-radius: 10px;
     border-left: .5em solid var(--primary-color);
-    background-color: var(--background-light);
+    background-color: var(--background-color);
     margin-top: 1em;
     display: flex;
     gap: 1em;
+    flex-wrap: wrap;
+    
     .option{
         height: 3.5em;
         width: 3.5em;
-        box-shadow: 0 3px 6px var(--shadow-color);
-        border-radius: 5px;
+        box-shadow: 0 3px 10px var(--shadow-color);
+        border-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+            transform: scale(1.05);
+        }
+        
         &.light{
             background-color: #fff;
         }
@@ -131,10 +225,13 @@ img{
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 2px 5px var(--shadow-color);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            animation: popIn 0.3s ease-out;
+            
             svg{
                 height: 1.5em;
                 width: 1.5em;
+                color: white;
             }
         }
     }
@@ -143,9 +240,32 @@ img{
         margin-left: .5em;
     }
 }
+
 .d-block h2{
     font-size: 1.75em;
-    color: var(--text-color)
+    color: var(--text-color);
+    margin-bottom: 0.5em;
+}
+
+// Print styles
+@media print {
+    .navbar,
+    .footer,
+    .toast-container,
+    .recipe-actions,
+    .back-btn,
+    .cooking-timer,
+    .similar-recipes {
+        display: none !important;
+    }
+
+    body {
+        padding-top: 0;
+    }
+
+    .recipe-detail {
+        padding: 0;
+    }
 }
 
 @import "partials/footer.scss";

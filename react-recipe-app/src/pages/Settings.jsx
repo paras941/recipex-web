@@ -1,176 +1,253 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
-
-import { useState, useEffect } from "react"
+import { faCheck, faCog, faPalette, faFont, faPlay, faMoon, faSun, faTrash, faDownload, faUpload } from "@fortawesome/free-solid-svg-icons"
+import { useApp } from "../context/AppContext"
 
 export default function Settings(){
-    const [settings, setSettings] = useState({
-        "--background-color": "#fff",
-        "--background-light": "#fff",
-        "--primary-color": "rgb(255, 0, 86)",
-        "--shadow-color": "rgba(0,0,0,0.2)",
-        "--text-color": "#0A0A0A",
-        "--text-light": "#575757",
-        "--font-size": "16px",
-        "--animation-speed": 1
-    })
-    useEffect(() => {
-        const root = document.documentElement
-        for(let key in settings){
-            root.style.setProperty(key, settings[key])
-        }
-    }, [settings])
+    const { 
+        settings, 
+        setSettings, 
+        theme, 
+        setTheme,
+        favorites,
+        recentSearches,
+        shoppingList,
+        showToast
+    } = useApp();
 
-    const [theme, setTheme] = useState("light")
     const themes = [
         {
-            "--background-color": "#fff",
-            "--background-light": "#fff",
-            "--shadow-color": "rgba(0,0,0,0.2)",
-            "--text-color": "#0A0A0A",
-            "--text-light": "#575757"
+            name: "light",
+            label: "Light",
+            icon: faSun,
+            values: {
+                "--background-color": "#fff",
+                "--background-light": "#fff",
+                "--shadow-color": "rgba(0,0,0,0.2)",
+                "--text-color": "#0A0A0A",
+                "--text-light": "#575757"
+            }
         },
         {
-            "--background-color": "rgb(29, 29, 29)",
-            "--background-light": "rgb(77, 77, 77)",
-            "--shadow-color": "rgba(0,0,0,0.2)",
-            "--text-color": "#ffffff",
-            "--text-light": "#eceaea",
+            name: "dark",
+            label: "Dark",
+            icon: faMoon,
+            values: {
+                "--background-color": "rgb(29, 29, 29)",
+                "--background-light": "rgb(77, 77, 77)",
+                "--shadow-color": "rgba(0,0,0,0.4)",
+                "--text-color": "#ffffff",
+                "--text-light": "#eceaea"
+            }
         }
-    ]
-
-    function changeTheme(i){
-        const _theme = {...themes[i]}
-        setTheme(i === 0 ? "light" : "dark")
-        let _settings = {...settings}
-        for(let key in _theme){
-            _settings[key] = _theme[key]
-        }
-        setSettings(_settings)
-    }
-
-    function changeColor(i){
-        const _color = primaryColors[i]
-        let _settings = {...settings}
-        _settings["--primary-color"] = _color
-        setPrimaryColor(i)
-        setSettings(_settings) 
-    }
-
-    function changeFontSize(i){
-        const _size = fontSizes[i]
-        let _settings = {...settings}
-        _settings["--font-size"] = _size.value
-        setFontSize(i)
-        setSettings(_settings)
-    }
-
-    function changeAnimationSpeed(i){
-        let _speed = animationSpeeds[i]
-        let _settings = {...settings}
-        _settings["--animation-speed"] = _speed.value
-        setAnimationSpeed(i)
-        setSettings(_settings)
-    }
-
-
+    ];
 
     const primaryColors = [
-        "rgb(255, 0, 86)",
-        "rgb(33, 150, 243)",
-        "rgb(255, 193, 7)",
-        "rgb(0, 200, 83)",
-        "rgb(156, 39, 176)"
-    ]
+        { name: "Rose", value: "rgb(255, 0, 86)" },
+        { name: "Ocean", value: "rgb(33, 150, 243)" },
+        { name: "Sunset", value: "rgb(255, 152, 0)" },
+        { name: "Forest", value: "rgb(76, 175, 80)" },
+        { name: "Lavender", value: "rgb(156, 39, 176)" },
+        { name: "Cherry", value: "rgb(244, 67, 54)" }
+    ];
+
     const fontSizes = [
-        {
-            title: "Small",
-            value: "12px"
-        },
-        {
-            title: "Medium",
-            value: "16px"
-        },
-        {
-            title: "Large",
-            value: "20px"
-        }
-    ]
+        { title: "Compact", value: "14px" },
+        { title: "Default", value: "16px" },
+        { title: "Large", value: "18px" },
+        { title: "Extra Large", value: "20px" }
+    ];
+
     const animationSpeeds = [
-        {
-              title: "Slow",
-              value: 2
-        },
-        {
-              title: "Medium",
-              value: 1
-        },
-        {
-              title: "Fast",
-              value: .5
+        { title: "Slow", value: 2 },
+        { title: "Normal", value: 1 },
+        { title: "Fast", value: 0.5 },
+        { title: "Instant", value: 0.1 }
+    ];
+
+    function changeTheme(themeObj) {
+        setTheme(themeObj.name);
+        let _settings = { ...settings };
+        for (let key in themeObj.values) {
+            _settings[key] = themeObj.values[key];
         }
-    ]
-    const [primaryColor, setPrimaryColor] = useState(0)
-    const [fontSize, setFontSize] = useState(1)
-    const [animationSpeed, setAnimationSpeed] = useState(1)
+        setSettings(_settings);
+        showToast(`${themeObj.label} theme applied`, 'success');
+    }
+
+    function changeColor(color) {
+        setSettings({ ...settings, "--primary-color": color.value });
+        showToast(`${color.name} color applied`, 'success');
+    }
+
+    function changeFontSize(size) {
+        setSettings({ ...settings, "--font-size": size.value });
+    }
+
+    function changeAnimationSpeed(speed) {
+        setSettings({ ...settings, "--animation-speed": speed.value });
+    }
+
+    function exportData() {
+        const data = {
+            settings,
+            theme,
+            favorites,
+            recentSearches,
+            shoppingList,
+            exportedAt: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'foodieshub-backup.json';
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Data exported successfully!', 'success');
+    }
+
+    function clearAllData() {
+        if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+            localStorage.clear();
+            window.location.reload();
+        }
+    }
+
     return (
-        <div>
-            <div className="section d-block">
-                <h2>Primary Theme</h2>
-                <div className="options-container">
-                    <div className="option light" onClick={() => changeTheme(0)}>
-                        { theme === "light" && (
-                            <div className="check">
-                                <FontAwesomeIcon icon={faCheck} />
-                            </div>
-                        ) }
-                    </div>
-                    <div className="option dark" onClick={() => changeTheme(1)}>
-                        { theme === "dark" && (
-                            <div className="check">
-                                <FontAwesomeIcon icon={faCheck} />
-                            </div>
-                        ) }
-                    </div>
-                </div>
+        <div className="settings-page page-enter">
+            <div className="page-header">
+                <h1>
+                    <FontAwesomeIcon icon={faCog} className="header-icon" />
+                    Settings
+                </h1>
+                <p className="subtitle">Customize your experience</p>
             </div>
-            <div className="section d-block">
-                <h2>Preferred color</h2>
-                <div className="options-container">
-                    { primaryColors.map((color, index) => (
-                        <div key={index} className="option light" style={{backgroundColor: color}} onClick={() => changeColor(index)}>
-                            { primaryColor === index && (
+
+            {/* Theme Section */}
+            <div className="settings-section animate-fadeInUp">
+                <div className="section-header">
+                    <FontAwesomeIcon icon={faMoon} />
+                    <h2>Theme</h2>
+                </div>
+                <div className="options-container theme-options">
+                    {themes.map((t) => (
+                        <div 
+                            key={t.name}
+                            className={`theme-option ${t.name} ${theme === t.name ? 'active' : ''}`}
+                            onClick={() => changeTheme(t)}
+                        >
+                            <div className="theme-preview">
+                                <FontAwesomeIcon icon={t.icon} />
+                            </div>
+                            <span className="theme-label">{t.label}</span>
+                            {theme === t.name && (
                                 <div className="check">
                                     <FontAwesomeIcon icon={faCheck} />
                                 </div>
-                            ) }
+                            )}
                         </div>
                     ))}
                 </div>
             </div>
-            <div className="section d-block">
-                <h2>Font size</h2>
-                <div className="options-container">
-                    { fontSizes.map((size, index) => (
-                        <button key={index} className="btn" onClick={() => changeFontSize(index)}>
+
+            {/* Color Section */}
+            <div className="settings-section animate-fadeInUp" style={{ animationDelay: '0.1s' }}>
+                <div className="section-header">
+                    <FontAwesomeIcon icon={faPalette} />
+                    <h2>Accent Color</h2>
+                </div>
+                <div className="options-container color-options">
+                    {primaryColors.map((color) => (
+                        <div 
+                            key={color.value}
+                            className={`color-option ${settings["--primary-color"] === color.value ? 'active' : ''}`}
+                            style={{ backgroundColor: color.value }}
+                            onClick={() => changeColor(color)}
+                            title={color.name}
+                        >
+                            {settings["--primary-color"] === color.value && (
+                                <FontAwesomeIcon icon={faCheck} />
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Font Size Section */}
+            <div className="settings-section animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
+                <div className="section-header">
+                    <FontAwesomeIcon icon={faFont} />
+                    <h2>Text Size</h2>
+                </div>
+                <div className="options-container button-options">
+                    {fontSizes.map((size) => (
+                        <button 
+                            key={size.value}
+                            className={`option-btn ${settings["--font-size"] === size.value ? 'active' : ''}`}
+                            onClick={() => changeFontSize(size)}
+                        >
                             {size.title}
-                            { fontSize === index && <span><FontAwesomeIcon icon={faCheck} /></span> }
+                            {settings["--font-size"] === size.value && (
+                                <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                            )}
                         </button>
                     ))}
                 </div>
             </div>
-            <div className="section d-block">
-                <h2>Animation speed</h2>
-                <div className="options-container">
-                    { animationSpeeds.map((speed, index) => (
-                        <button key={index} className="btn" onClick={() => changeAnimationSpeed(index)}>
+
+            {/* Animation Speed Section */}
+            <div className="settings-section animate-fadeInUp" style={{ animationDelay: '0.3s' }}>
+                <div className="section-header">
+                    <FontAwesomeIcon icon={faPlay} />
+                    <h2>Animation Speed</h2>
+                </div>
+                <div className="options-container button-options">
+                    {animationSpeeds.map((speed) => (
+                        <button 
+                            key={speed.value}
+                            className={`option-btn ${settings["--animation-speed"] === speed.value ? 'active' : ''}`}
+                            onClick={() => changeAnimationSpeed(speed)}
+                        >
                             {speed.title}
-                            { animationSpeed === index && <span><FontAwesomeIcon icon={faCheck} /></span> }
+                            {settings["--animation-speed"] === speed.value && (
+                                <FontAwesomeIcon icon={faCheck} className="check-icon" />
+                            )}
                         </button>
                     ))}
                 </div>
             </div>
-            
+
+            {/* Data Management Section */}
+            <div className="settings-section animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
+                <div className="section-header">
+                    <FontAwesomeIcon icon={faDownload} />
+                    <h2>Data Management</h2>
+                </div>
+                <div className="data-stats">
+                    <div className="stat-item">
+                        <span className="stat-value">{favorites.length}</span>
+                        <span className="stat-label">Favorites</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">{recentSearches.length}</span>
+                        <span className="stat-label">Recent Searches</span>
+                    </div>
+                    <div className="stat-item">
+                        <span className="stat-value">{shoppingList.length}</span>
+                        <span className="stat-label">Shopping Items</span>
+                    </div>
+                </div>
+                <div className="options-container button-options">
+                    <button className="option-btn" onClick={exportData}>
+                        <FontAwesomeIcon icon={faDownload} />
+                        Export Data
+                    </button>
+                    <button className="option-btn danger" onClick={clearAllData}>
+                        <FontAwesomeIcon icon={faTrash} />
+                        Clear All Data
+                    </button>
+                </div>
+            </div>
         </div>
     )
 }
