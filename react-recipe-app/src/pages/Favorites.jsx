@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faUtensils } from '@fortawesome/free-solid-svg-icons';
-import RecipeCard from '../components/RecipeCard';
+import RecipeCard from '../components/RecipeCard'; 
 import { recipes } from '../data/recipes';
 import { useApp } from '../context/AppContext';
 

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
     faClock, faUtensils, faFire, faStar, faHeart as faHeartSolid,
     faArrowLeft, faShare, faPrint, faPlus, faMinus, faCheck,
-    faUser, faChartPie, faShoppingCart
+    faUser, faChartPie, faShoppingCart 
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import { getRecipeById, getSimilarRecipes } from '../data/recipes';

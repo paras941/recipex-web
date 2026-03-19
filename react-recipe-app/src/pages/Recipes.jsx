@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faFilter, faTimes, faHeart, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import PreviousSearches from '../components/PreviousSearches';
 import RecipeCard from '../components/RecipeCard';
-import { recipes, searchRecipes, getCategories } from '../data/recipes';
+import { recipes, searchRecipes, getCategories } from '../data/recipes'; 
 import { useApp } from '../context/AppContext';
 
 export default function Recipes() {

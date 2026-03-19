@@ -7,7 +7,7 @@ export default function Settings(){
         settings, 
         setSettings, 
         theme, 
-        setTheme,
+        setTheme, 
         favorites,
         recentSearches,
         shoppingList,

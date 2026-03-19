@@ -10,7 +10,7 @@ export default function ShoppingList() {
     const { 
         shoppingList, 
         toggleShoppingItem, 
-        removeFromShoppingList, 
+        removeFromShoppingList,  
         clearShoppingList,
         showToast,
         addToShoppingList

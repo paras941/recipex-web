@@ -7,7 +7,7 @@ import QuoteSection from '../components/QuoteSection';
 import ChiefsSection from '../components/ChiefsSection';
 import RecipeCard from '../components/RecipeCard';
 import { getFeaturedRecipes, getCategories } from '../data/recipes';
-
+ 
 export default function Home() {
     const featuredRecipes = getFeaturedRecipes();
     const categories = getCategories().filter(c => c !== 'All');
